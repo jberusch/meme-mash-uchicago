@@ -15,7 +15,6 @@ Mako==1.1.0
 MarkupSafe==1.1.1
 Pillow==6.2.1
 pillowcase==2.0.0
-pkg-resources==0.0.0
 python-dateutil==2.8.1
 python-dotenv==0.10.3
 python-editor==1.0.4
