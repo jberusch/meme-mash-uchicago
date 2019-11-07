@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+    {% for meme in memes %}
+    <div style="display: flex; flex-direction: row; justify-content: center; margin: 15px; align-items: center;">
+        <img 
+            src="{{url_for('static', filename='memes/{}'.format(meme.filename))}}"
+            height="300"
+            width="400"
+            />
+        <p style="font-size: 40px; margin: 15px;">{{ meme.caption }}</p>
+    </div>
+    <hr />
+    {% endfor %}
+</div>
+{% endblock %}

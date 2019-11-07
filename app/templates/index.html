@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="display: flex; flex-direction: row; justify-content: center;">
+    {% for i in range(0, 2) %}
+    <div style="margin: 25px; padding: 5px; width: {{ img_sizes[i][0] }}; border-style: solid; border-width: 3px; border-color: grey;">
+        <img 
+            onclick="window.location.href='{{ url_for('index', choice=memes[i].id) }}'" 
+            src="{{url_for('static', filename='memes/{}'.format(memes[i].filename))}}"
+            height="{{ img_sizes[i][1] }}"
+            width="{{ img_sizes[i][0] }}"
+            />
+        <p style="font-size: 25px;">{{ memes[i].caption }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
