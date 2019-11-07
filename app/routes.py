@@ -38,7 +38,7 @@ def index():
     memes.append(all_memes[meme2_index])
 
     # get meme image sizes
-    # TODO: make this its own functino
+    # TODO: make this its own function
     img_sizes = []
     for meme in memes:
         with open('app/static/memes/{}'.format(meme.filename), 'rb') as fp:
@@ -62,7 +62,6 @@ def index():
         # define scaling constant
         k = 25
 
-        print('\n==================================')
         chosen_meme_record = Meme.query.get(chosen_meme_id)
         other_meme_record = Meme.query.get(other_meme_id)
 
@@ -75,12 +74,11 @@ def index():
         chosen_meme_record.rating = new_chosen_score
         other_meme_record.rating = new_other_score
 
-        print(new_chosen_score)
-        print(new_other_score)
+        chosen_meme_record.num_contests += 1
+        other_meme_record.num_contests += 1
     
         # update DB
         db.session.commit()
-        print('\n==================================\n')
 
     return render_template('index.html', memes=memes, img_sizes=img_sizes)
 
