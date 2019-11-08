@@ -4,6 +4,7 @@
 <div class="selection-window" style="display: flex; flex-direction: row; justify-content: center; width: 100%;">
     {% for i in range(0, 2) %}
     <div 
+        id='meme-container-{{ i }}'
         style="margin: 25px; padding: 5px; border-style: solid; border-width: 3px; border-color: grey;"
         onclick="window.location.href='{{ url_for('index', choice=memes[i].id, other=memes[i - 1].id) }}'"
         >
@@ -40,9 +41,9 @@
     // detect arrow key presses
     document.addEventListener('keydown', e => {
         if (e.key === 'ArrowLeft') {
-            img0.onclick()
+            document.getElementById('meme-container-0').onclick()
         } else if (e.key === 'ArrowRight') {
-            img1.onclick()
+            document.getElementById('meme-container-1').onclick()
         }
     })
 
