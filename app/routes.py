@@ -72,3 +72,7 @@ def leaderboard():
     # get first 20 memes in order by rating
     top_20_memes = Meme.query.order_by(desc(Meme.rating)).limit(20).all()
     return render_template('leaderboard.html', memes=top_20_memes)
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
