@@ -36,21 +36,6 @@ def index():
     memes = []
     memes.append(all_memes[meme1_index])
     memes.append(all_memes[meme2_index])
-
-    # get meme image sizes
-    # TODO: make this its own function
-    img_sizes = []
-    for meme in memes:
-        with open('app/static/memes/{}'.format(meme.filename), 'rb') as fp:
-            img_bytes = BytesIO(fp.read())
-            img = Image.open(img_bytes)
-            size = img.size
-            ratio = size[0] / size[1]
-
-            # TODO: adjust these sizes later by ratio
-
-            adjusted_size = (800, 600)
-            img_sizes.append(adjusted_size)
             
     # get selection
     chosen_meme_id = request.args.get('choice')
@@ -80,7 +65,7 @@ def index():
         # update DB
         db.session.commit()
 
-    return render_template('index.html', memes=memes, img_sizes=img_sizes)
+    return render_template('index.html', memes=memes)
 
 @app.route('/leaderboard')
 def leaderboard():

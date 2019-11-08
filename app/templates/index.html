@@ -1,17 +1,50 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div style="display: flex; flex-direction: row; justify-content: center;">
+<div class="selection-window" style="display: flex; flex-direction: row; justify-content: center;">
     {% for i in range(0, 2) %}
-    <div style="margin: 25px; padding: 5px; width: {{ img_sizes[i][0] }}; border-style: solid; border-width: 3px; border-color: grey;">
+    <div style="margin: 25px; padding: 5px; border-style: solid; border-width: 3px; border-color: grey;">
         <img 
+            class="meme-image"
             onclick="window.location.href='{{ url_for('index', choice=memes[i].id, other=memes[i - 1].id) }}'" 
             src="{{url_for('static', filename='memes/{}'.format(memes[i].filename))}}"
-            height="{{ img_sizes[i][1] }}"
-            width="{{ img_sizes[i][0] }}"
-            />
+            height="{{ 800 }}"
+            width="{{ 800 }}"
+        />
         <p style="font-size: 25px;">{{ memes[i].caption }}</p>
     </div>
     {% endfor %}
 </div>
+
+<script>
+    // fetch image elements
+    imgs = document.getElementsByClassName('meme-image')
+    
+    // adjust image width
+    const innerWidth = window.innerWidth
+    const innerHeight = window.innerHeight
+    const percentOfWindowWidth = 0.35
+
+    let img0 = imgs[0]
+    let HWRatio = img0.width / img0.height
+    img0.width = innerWidth * percentOfWindowWidth
+    img0.height = img0.width / HWRatio
+
+    let img1 = imgs[1]
+    HWRatio = img1.width / img1.height
+    img1.width = innerWidth * percentOfWindowWidth
+    img1.height = img1.width / HWRatio
+
+    // detect arrow key presses
+    document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowLeft') {
+            img0.onclick()
+        } else if (e.key === 'ArrowRight') {
+            img1.onclick()
+        }
+    })
+
+    // dynamically resize window
+    // document.addEventListener()
+</script>    
 {% endblock %}
