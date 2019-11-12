@@ -1,2 +1,4 @@
 FLASK_APP=mememash.py
+FLASK_ENV=development
+TEMPLATES_HOT_RELOAD=True
 FLASK_DEBUG=1

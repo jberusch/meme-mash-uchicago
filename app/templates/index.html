@@ -4,18 +4,18 @@
 <p style="font-size: 20px;">
     Tap the better meme or select with arrow keys (&larr; &rarr;)
 </p>
-<div class="selection-window" style="display: flex; flex-direction: row; justify-content: center; width: 100%;">
+<div id="selection-window" style="display: flex; flex-direction: row; justify-content: center; width: 100%;">
     {% for i in range(0, 2) %}
     <div 
         id='meme-container-{{ i }}'
         style="margin: 25px; padding: 5px; border-style: solid; border-width: 3px; border-color: grey;"
         onclick="window.location.href='{{ url_for('index', choice=memes[i].id, other=memes[i - 1].id) }}'"
-        >
+    >
         <img 
             class="meme-image"
             src="{{url_for('static', filename='memes/{}'.format(memes[i].filename))}}"
-            height="{{ 800 }}"
-            width="{{ 800 }}"
+            height="800"
+            width="800"
         />
         <p style="font-size: 25px;">{{ memes[i].caption }}</p>
     </div>
@@ -26,21 +26,37 @@
     // fetch image elements
     imgs = document.getElementsByClassName('meme-image')
     
-    // adjust image width
-    const innerWidth = window.innerWidth
-    const innerHeight = window.innerHeight
-    const percentOfWindowWidth = 0.35
+    const scaleImages = () => {
+        console.log('scale images')
 
-    let img0 = imgs[0]
-    let HWRatio = img0.width / img0.height
-    img0.width = innerWidth * percentOfWindowWidth
-    img0.height = img0.width / HWRatio
+        // get window width
+        const innerWidth = window.innerWidth
+    
+        // if window is too skinny, make windows almost full width and stack them
+        let percentOfWindowWidth
+        if (innerWidth < 600) {
+            percentOfWindowWidth = 0.8
+            // update div
+            document.getElementById('selection-window').style = "display: flex; flex-direction: column; justify-content: center; width: 100%;"
+        } else {
+            percentOfWindowWidth = 0.35
+            document.getElementById('selection-window').style = "display: flex; flex-direction: row; justify-content: center; width: 100%;"
+        }
 
-    let img1 = imgs[1]
-    HWRatio = img1.width / img1.height
-    img1.width = innerWidth * percentOfWindowWidth
-    img1.height = img1.width / HWRatio
+        // adjust height/width of both images (for some reason it won't let me iterate over imgs as array...)
+        let img0 = imgs[0]
+        let HWRatio = img0.width / img0.height
+        img0.width = innerWidth * percentOfWindowWidth
+        img0.height = img0.width / HWRatio
 
+        let img1 = imgs[1]
+        HWRatio = img1.width / img1.height
+        img1.width = innerWidth * percentOfWindowWidth
+        img1.height = img1.width / HWRatio
+    }
+
+    scaleImages()
+    
     // detect arrow key presses
     document.addEventListener('keydown', e => {
         if (e.key === 'ArrowLeft') {
@@ -51,6 +67,8 @@
     })
 
     // dynamically resize window
-    // document.addEventListener()
+    window.addEventListener('resize', e => {
+        scaleImages()
+    })
 </script>    
 {% endblock %}
