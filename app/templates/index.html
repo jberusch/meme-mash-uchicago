@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
+<p style="font-size: 35px;">
+    Vote for the better meme!
+</p>
 <p style="font-size: 20px;">
-    Tap the better meme or select with arrow keys (&larr; &rarr;)
+    Tap or select with arrow keys (&larr; &rarr;)
 </p>
 <div id="selection-window" style="display: flex; flex-direction: row; justify-content: center; width: 100%;">
     {% for i in range(0, 2) %}
