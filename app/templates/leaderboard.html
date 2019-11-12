@@ -7,7 +7,7 @@
 <div>
     {% for meme in memes %}
     <div style="display: flex; flex-direction: row; justify-content: left; margin: 15px; align-items: center;">
-        <h1 style="font-size: 100px; color: forestgreen; margin: 20px">{{ loop.index0 }}</h1>
+        <h1 style="font-size: 100px; color: forestgreen; margin: 20px">{{ loop.index0 + 1 }}</h1>
         <img 
             src="{{url_for('static', filename='memes/{}'.format(meme.filename))}}"
             style="margin-left: 30px; margin-right: 30px;"
