@@ -5,8 +5,7 @@
     vote for the better meme!
 </p>
 <p style="font-size: 20px;">
-    tap or select with arrow keys (&larr; &rarr;)
-    <br />(fyi view is better on laptop or landscape on phone)
+    tap meme or select with arrow keys (&larr; &rarr;) on keyboard
 </p>
 <div id="selection-window" style="display: flex; flex-direction: row; justify-content: center; width: 100%;">
     {% for i in range(0, 2) %}
@@ -39,7 +38,6 @@
             || navigator.userAgent.match(/BlackBerry/i)
             || navigator.userAgent.match(/Windows Phone/i)
     }
-    console.log(navigator.userAgent.match(/Chrome/i))
     
     const scaleImages = () => {
         console.log('scale images')
