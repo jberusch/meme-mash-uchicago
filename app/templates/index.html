@@ -29,6 +29,8 @@
     // fetch image elements
     imgs = document.getElementsByClassName('meme-image')
 
+    // TODO: detect if mobile, then detect if width > length to determine orientation
+
     const isMobileDevice = () => {
         return navigator.userAgent.match(/Android/i)
             || navigator.userAgent.match(/webOS/i)
